@@ -19,6 +19,15 @@ function showSuccess(input) {
     formControl.className = 'form-control success';
 }
 
+function checkEmail(input) {
+    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (re.test(input.value.trim())) {
+        showSuccess(input);
+    } else {
+        showError(input, 'Email is not valid');
+    }
+}
+
 function checkRequired(inputArr) {
     inputArr.forEach(input => {
         console.log(input.value);
@@ -39,15 +48,6 @@ function checkLength(input, min, max) {
         showError(input, `${getFieldName(input)} must be less than ${max} characters`) 
     } else {
         showSuccess(input);
-    }
-}
-
-function checkEmail(input) {
-    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (re.test(input.value.trim())) {
-        showSuccess(input);
-    } else {
-        showError(input, 'Email is not valid');
     }
 }
 
@@ -72,7 +72,6 @@ function checkPersonalURL(input) {
    } else if(input.value!=='') {
         showError(input, 'Domain not valid')
    }
-        
 }
 
 function getFieldName(input) {

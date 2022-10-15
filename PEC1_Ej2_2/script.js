@@ -1,5 +1,6 @@
 function calculate(params) {
-    fetch('items.json').then(res => console.log(res))
+    fetch('items.json').then(res => res.json())
+    .then(data => (document.body.innerHTML = data[0].text));
 }
 
 calculate()

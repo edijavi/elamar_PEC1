@@ -3,6 +3,8 @@ const seats = document.querySelectorAll('.row .seat:not(.occupied)');
 const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
+//const currencyEl_two = document.getElementById('currency-two');
+
 
 populateUI();
 
@@ -14,6 +16,34 @@ function setMovieData(movieIndex, moviePrice) {
     localStorage.setItem('selectedMoviePrice', moviePrice);
 
 }
+
+// function calculate() {
+//     const apiURL = 'https://v6.exchangerate-api.com/v6/570e43e0f5bbeb36ff4f12a3/latest/'
+//     const currency_one = "USD";
+//     const currency_two = currencyEl_two.value;
+//     fetch(apiURL+currency_one)
+//     .then(function (res) {
+//         showLoading()
+//         if (res) {
+//             res.json()
+//             .then(data =>{
+//             const rate = data.conversion_rates[currency_two] / data.conversion_rates[currency_one];
+//             total.value = (total.value * (rate)).toFixed(2);
+//             console.log(total.value);
+//             });
+            
+//         } else {
+//             console.log('Network response OK  but HTTP response NO OK');            
+//         } 
+//     })
+//     .catch(function(error) {
+//         console.log('There was a problem with your Fetch request:' + error.message);
+//     });
+// }
+
+// function showLoading() {
+//     return rateEL.innerText = 'Loading'
+// }
 
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');

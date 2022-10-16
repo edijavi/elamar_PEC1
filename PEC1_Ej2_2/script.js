@@ -12,8 +12,8 @@ function calculate() {
     const currency_two = currencyEl_two.value
     fetch(apiURL+currency_one)
     .then(function (res) {
+        showLoading()
         if (res) {
-            showLoading();
             res.json()
             .then(data =>{
             const rate = data.conversion_rates[currency_two] / data.conversion_rates[currency_one];
@@ -32,7 +32,6 @@ function calculate() {
 
 function showLoading() {
     return rateEL.innerText = 'Loading'
-    
 }
 
 currencyEl_one.addEventListener('change', calculate);

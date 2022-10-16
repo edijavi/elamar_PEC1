@@ -7,17 +7,32 @@ const rateEL = document.getElementById('rate');
 const swap = document.getElementById('swap');
 
 function calculate() {
+    const apiURL = 'https://v6.exchangerate-api.com/v6/570e43e0f5bbeb36ff4f12a3/latest/'
     const currency_one = currencyEl_one.value;
     const currency_two = currencyEl_two.value
-    fetch(`https://v6.exchangerate-api.com/v6/570e43e0f5bbeb36ff4f12a3/latest/${currency_one}`)
-    .then(res => res.json())
-    .then(data =>{
-        //console.log(data);
-        const rate = data.conversion_rates[currency_two] / data.conversion_rates[currency_one];
-        rateEL.innerText = `1 ${currency_one} = ${rate} ${currency_two}`;
-        amountEl_two.value = (amountEl_one.value * (rate)).toFixed(2);
+    fetch(apiURL+currency_one)
+    .then(function (res) {
+        if (res) {
+            showLoading();
+            res.json()
+            .then(data =>{
+            const rate = data.conversion_rates[currency_two] / data.conversion_rates[currency_one];
+            rateEL.innerText = `1 ${currency_one} = ${rate} ${currency_two}`;
+            amountEl_two.value = (amountEl_one.value * (rate)).toFixed(2);
+            });
+            
+        } else {
+            console.log('Network response OK  but HTTP response NO OK');            
+        } 
     })
+    .catch(function(error) {
+        console.log('There was a problem with your Fetch request:' + error.message);
+    });
+}
 
+function showLoading() {
+    return rateEL.innerText = 'Loading'
+    
 }
 
 currencyEl_one.addEventListener('change', calculate);
